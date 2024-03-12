@@ -72,6 +72,7 @@ export const FilterBar = ({ games, setFilteredGames, currentUser }) => {
 
 
     const clearFilters = () => {
+        setShowOnlyOwnedGames(false)
         setGameTypeFilter(0)
         setGenreFilter(0)
         setTitleFilter("")
