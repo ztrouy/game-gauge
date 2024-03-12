@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material"
+import { Box } from "@mui/material"
 import { Game } from "./Game.jsx"
 import { useEffect, useState } from "react"
 import { getAllGames } from "../../services/gameService.jsx"
@@ -15,12 +15,27 @@ export const Games = ({ currentUser }) => {
     }, [])
 
     useEffect(() => {
+        const sortedGames = games.sort((firstGame, secondGame) => {
+            const firstGameName = firstGame.name.toUpperCase()
+            const secondGameName = secondGame.name.toUpperCase()
+
+            if (firstGameName < secondGameName) {
+                return -1
+            } else if (firstGameName > secondGameName) {
+                return 1
+            } else {
+                return 0
+            }
+        })
+
+        setGames(sortedGames)
+        
         setFilteredGames(games)
     }, [games])
     
     return (
         <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
-            <FilterBar games={games} setFilteredGames={setFilteredGames}/>
+            <FilterBar games={games} setFilteredGames={setFilteredGames} currentUser={currentUser} />
             <Box 
                 display={"flex"} 
                 justifyContent={"center"}
