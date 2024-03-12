@@ -1,27 +1,55 @@
-import { Button, Card, CardMedia, Typography, Box } from "@mui/material"
+import { Button, Card, CardMedia, Typography, Box, Paper } from "@mui/material"
+import { useEffect, useState } from "react"
+import { getUserById } from "../../services/userService.jsx"
 
-export const Game = ({ gameObject, currentUser }) => {
+export const Game = ({ game, currentUser }) => {
+    const [user, setUser] = useState({userGames: []})
+    const [ownsGame, setOwnsGame] = useState(false)
+
+    useEffect(() => {
+        getUserById(currentUser.id).then(userArray => {
+            const userObject = userArray[0]
+            setUser(userObject)
+        })
+    }, [currentUser])
+
+    useEffect(() => {
+        if (user.userGames.find(userGame => userGame.id === game.id)) {
+            setOwnsGame(true)
+        }
+    }, [user, game])
+
+    const handleButton = () => {
+        console.log("Clicked!") // TODO : Implement creating and removing userGames items
+    }
+
     return (
-        <Card sx={{width: 350}}>
-            <CardMedia 
-                sx={{height: 165}}
-                image="https://cdn.cloudflare.steamstatic.com/steam/apps/1966720/header_292x136.jpg?t=1700231592"
-                title="Lethal Company"
-            />
-            <Box margin={1}>
-                <Typography 
-                    textAlign={"left"}
-                    variant="h5"
-                    sx={{
-                        fontWeight: "bold"
-                    }}
-                >
-                    Lethal Company
-                </Typography>
-                <Box marginTop={1} sx={{ display: "flex", justifyContent: "right"}}>
-                    <Button variant="contained">Add Game</Button>
+        <Paper margin={2}>
+            <Card sx={{width: 350}}>
+                <CardMedia 
+                    sx={{height: 165}}
+                    image={game.imageHeader}
+                    title={game.name}
+                />
+                <Box margin={1}>
+                    <Typography 
+                        textAlign={"left"}
+                        variant="h5"
+                        sx={{
+                            fontWeight: "bold"
+                        }}
+                    >
+                        {game.name}
+                    </Typography>
+                    <Box marginTop={1} sx={{ display: "flex", justifyContent: "right"}}>
+                        {ownsGame ? (
+                            <Button variant="contained" onClick={handleButton}>Remove Game</Button>
+                        ) : (
+                            <Button variant="contained" onClick={handleButton}>Add Game</Button>
+                        )}
+                    </Box>
                 </Box>
-            </Box>
-        </Card>
+            </Card>
+        </Paper>
     )
 }
