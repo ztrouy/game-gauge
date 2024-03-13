@@ -1,4 +1,4 @@
-import { Box, Container, Paper, Typography } from "@mui/material"
+import { Container, Paper, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getAllGames } from "../../services/gameService.jsx"
 import { GameList } from "../games/GameList.jsx"
