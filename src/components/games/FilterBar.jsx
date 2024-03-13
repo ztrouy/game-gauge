@@ -2,12 +2,10 @@ import { useEffect, useState } from "react"
 import { getAllGameTypes } from "../../services/gameTypeService.js"
 import { getAllGenres } from "../../services/genreService.js"
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material"
-import { getUserById } from "../../services/userService.jsx"
 
-export const FilterBar = ({ games, setFilteredGames, currentUser }) => {
+export const FilterBar = ({ games, setFilteredGames, user }) => {
     const [gameTypes, setGameTypes] = useState([])
     const [genres, setGenres] = useState([])
-    const [user, setUser] = useState({})
     const [gamesToDisplay, setGamesToDisplay] = useState([])
     
     const [gameTypeFilter, setGameTypeFilter] = useState(0)
@@ -15,13 +13,6 @@ export const FilterBar = ({ games, setFilteredGames, currentUser }) => {
     const [titleFilter, setTitleFilter] = useState("")
     const [showOnlyOwnedGames, setShowOnlyOwnedGames] = useState(false)
 
-
-    useEffect(() => {
-        getUserById(currentUser.id).then(usersArray => {
-            const userObject = usersArray[0]
-            setUser(userObject)
-        })
-    }, [games, currentUser])
     
     
     useEffect(() => {

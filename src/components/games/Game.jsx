@@ -2,26 +2,41 @@ import { Button, Card, CardMedia, Typography, Box, Paper } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUserById } from "../../services/userService.jsx"
 
-export const Game = ({ game, currentUser }) => {
-    const [user, setUser] = useState({userGames: []})
+export const Game = ({ game, user, currentUser }) => {
     const [ownsGame, setOwnsGame] = useState(false)
+    const [activeUser, setActiveUser] = useState({})
+
+
 
     useEffect(() => {
-        getUserById(currentUser.id).then(userArray => {
-            const userObject = userArray[0]
-            setUser(userObject)
-        })
-    }, [currentUser])
-
-    useEffect(() => {
-        if (user.userGames.find(userGame => userGame.id === game.id)) {
-            setOwnsGame(true)
+        if (user?.id != currentUser.id) {
+            getUserById(currentUser.id).then(userArray => {
+                const userObject = userArray[0]
+                setActiveUser(userObject)
+            })
+        } else {
+            setActiveUser(user)
         }
-    }, [user, game])
+    }, [user, currentUser])
+
+
+    useEffect(() => {
+        if (activeUser.hasOwnProperty("userGames")) {
+            if (activeUser?.userGames.find(userGame => userGame.gameId === game.id)) {
+                setOwnsGame(true)
+            } else {
+                setOwnsGame(false)
+            }
+        }
+    }, [activeUser, game])
+
+
 
     const handleButton = () => {
         console.log("Clicked!") // TODO : Implement creating and removing userGames items
     }
+
+
 
     return (
         <Paper margin={2}>
