@@ -13,6 +13,7 @@ export const NavBar = () => {
                             <Button variant="text" component={Link} to={"/games"} sx={{color: "white"}}>Games</Button>
                         </Grid>
                         <Grid>
+                            <Button variant="text" component={Link} to={"/profile"} sx={{color: "white"}}>Profile</Button>
                             <Button variant="text" sx={{color: "white"}} onClick={() => {
                                 localStorage.removeItem("game_gauge_user")
                                 navigate("/login", { replace : true })
