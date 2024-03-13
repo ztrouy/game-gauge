@@ -1,7 +1,9 @@
 import { AppBar, Button, Container, Grid, Toolbar } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export const NavBar = () => {
+    const navigate = useNavigate()
+    
     return (
         <AppBar position="static">
             <Container maxWidth="x1">
@@ -11,7 +13,10 @@ export const NavBar = () => {
                             <Button variant="text" component={Link} to={"/games"} sx={{color: "white"}}>Games</Button>
                         </Grid>
                         <Grid>
-                            <Button variant="text" sx={{color: "white"}}>Logout</Button>
+                            <Button variant="text" sx={{color: "white"}} onClick={() => {
+                                localStorage.removeItem("game_gauge_user")
+                                navigate("/login", { replace : true })
+                            }}>Logout</Button>
                         </Grid>
                     </Grid>
                 </Toolbar>
