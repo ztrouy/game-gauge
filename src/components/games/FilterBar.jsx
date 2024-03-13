@@ -81,7 +81,7 @@ export const FilterBar = ({ games, setFilteredGames, currentUser }) => {
 
 
     return (
-        <Grid container direction={"row"} justifyContent={"space-between"} marginBottom={3}>
+        <Grid container direction={"row"} justifyContent={"space-between"} marginBottom={3} paddingTop={3}>
             <Box>
                 <Grid container direction={"row"}>
                     <FormControl sx={{width: 200}}>
