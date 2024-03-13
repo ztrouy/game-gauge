@@ -2,15 +2,16 @@ import { Outlet, Route, Routes } from "react-router"
 import { Games } from "../components/games/Games.jsx"
 import { NavBar } from "../components/nav/NavBar.jsx"
 import { Profile } from "../components/profiles/Profile.jsx"
+import { Paper } from "@mui/material"
 
-export const PlayerViews = ({ currentUser }) => {
+export const PlayerViews = ({ currentUser }) => {  
     return (
         <Routes>
             <Route path="/" element={
-                <>
-                <NavBar />
-                <Outlet />
-                </>
+                <Paper>
+                    <NavBar />
+                    <Outlet />
+                </Paper>
             }>
                 <Route index element={<>Welcome!</>} />
                 <Route path="games">
@@ -18,6 +19,7 @@ export const PlayerViews = ({ currentUser }) => {
                 </Route>
                 <Route path="profile">
                     <Route index element={<Profile currentUser={currentUser} />} />
+                    <Route path=":userId" element={<Profile currentUser={currentUser} />} />
                 </Route>
             </Route>
         </Routes>
