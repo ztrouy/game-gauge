@@ -10,11 +10,11 @@ export const PlayerViews = ({ currentUser }) => {
         <Routes>
             <Route path="/" element={
                 <Paper>
-                    <NavBar />
+                    <NavBar currentUser={currentUser} />
                     <Outlet />
                 </Paper>
             }>
-                <Route index element={<>Welcome!</>} />
+                <Route index element={<Games currentUser={currentUser} />} />
                 <Route path="games">
                     <Route index element={<Games currentUser={currentUser} />} />
                 </Route>

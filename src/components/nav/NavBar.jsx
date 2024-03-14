@@ -1,7 +1,7 @@
 import { AppBar, Button, Container, Grid, Toolbar } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom"
 
-export const NavBar = () => {
+export const NavBar = ({ currentUser }) => {
     const navigate = useNavigate()
     
     return (
@@ -11,6 +11,11 @@ export const NavBar = () => {
                     <Grid display={"flex"} flexDirection={"row"} justifyContent={"space-between"} width={1}>
                         <Grid>
                             <Button variant="text" component={Link} to={"/games"} sx={{color: "white"}}>Games</Button>
+                            {currentUser.isStaff ? (
+                                <Button variant="text" component={Link} to={"/games/new"} sx={{color: "white"}} >New Game</Button>
+                            ) : (
+                                ""
+                            )}
                         </Grid>
                         <Grid>
                             <Button variant="text" component={Link} to={"/profile"} sx={{color: "white"}}>Profile</Button>
