@@ -1,8 +1,9 @@
 import { Button, Card, CardMedia, Typography, Box, Paper } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUserById } from "../../services/userService.jsx"
+import { createUserGame, deleteUserGame } from "../../services/gameService.jsx"
 
-export const Game = ({ game, user, currentUser }) => {
+export const Game = ({ game, user, fetchUserData, currentUser }) => {
     const [ownsGame, setOwnsGame] = useState(false)
     const [activeUser, setActiveUser] = useState({})
 
@@ -33,7 +34,20 @@ export const Game = ({ game, user, currentUser }) => {
 
 
     const handleButton = () => {
-        console.log("Clicked!") // TODO : Implement creating and removing userGames items
+        if (ownsGame) {
+            const currentUserGame = activeUser.userGames.find(userGame => userGame.gameId === game.id)
+            deleteUserGame(currentUserGame.id).then(() => {
+                fetchUserData()
+            })
+        } else {
+            const newUserGame = {
+                userId: activeUser.id,
+                gameId: game.id
+            }
+            createUserGame(newUserGame).then(() => {
+                fetchUserData()
+            })
+        }
     }
 
 

@@ -2,7 +2,7 @@ import { Box } from "@mui/material"
 import { Game } from "./Game.jsx"
 import { useEffect } from "react"
 
-export const GameList = ({ games, setGames, filteredGames, setFilteredGames, user, currentUser }) => {
+export const GameList = ({ games, setGames, filteredGames, setFilteredGames, user, fetchUserData, currentUser }) => {
     useEffect(() => {
         const sortedGames = games.sort((firstGame, secondGame) => {
             const firstGameName = firstGame.name.toUpperCase()
@@ -33,7 +33,7 @@ export const GameList = ({ games, setGames, filteredGames, setFilteredGames, use
             gap={4}
         >
             {filteredGames.map(game => {
-                return <Game game={game} user={user} currentUser={currentUser} key={game.id} />
+                return <Game game={game} user={user} fetchUserData={fetchUserData} currentUser={currentUser} key={game.id} />
             })}
         </Box>
     )

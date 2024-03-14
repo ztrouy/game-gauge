@@ -20,13 +20,19 @@ export const Games = ({ currentUser }) => {
 
 
     useEffect(() => {
+        fetchUserData()
+    }, [currentUser])
+
+    
+
+    const fetchUserData = () => {
         getUserById(currentUser.id).then(userArray => {
             const userObject = userArray[0]
             setUser(userObject)
         })
-    }, [currentUser])
+    }
 
-    
+
 
     return (
         <Container maxWidth={false}>
@@ -42,6 +48,7 @@ export const Games = ({ currentUser }) => {
                     filteredGames={filteredGames} 
                     setFilteredGames={setFilteredGames} 
                     user={user} 
+                    fetchUserData={fetchUserData}
                     currentUser={currentUser} 
                 />
             </Box>
