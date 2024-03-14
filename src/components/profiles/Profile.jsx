@@ -17,18 +17,7 @@ export const Profile = ({ currentUser }) => {
 
 
     useEffect(() => {
-        let profileId = ""
-        
-        if (userId) {
-            profileId = userId
-        } else {
-            profileId = currentUser.id
-        }
-
-        getUserById(profileId).then(userArray => {
-            const userObject = userArray[0]
-            setProfileUser(userObject)
-        })
+        fetchUserData()
     }, [currentUser, userId])
 
 
@@ -46,6 +35,23 @@ export const Profile = ({ currentUser }) => {
 
 
 
+    const fetchUserData = () => {
+        let profileId = ""
+        
+        if (userId) {
+            profileId = userId
+        } else {
+            profileId = currentUser.id
+        }
+
+        getUserById(profileId).then(userArray => {
+            const userObject = userArray[0]
+            setProfileUser(userObject)
+        })
+    }
+
+
+
     return (
         <Container>
             <Paper sx={{mt: 3, mb: 3}}>
@@ -54,7 +60,7 @@ export const Profile = ({ currentUser }) => {
                 </Typography>
             </Paper>
             <Typography fontWeight={"bold"} textAlign={"left"}>{profileUser?.name}'s Game Library</Typography>
-            <GameList games={games} setGames={setGames} filteredGames={filteredGames} setFilteredGames={setFilteredGames} user={profileUser} currentUser={currentUser} />
+            <GameList games={games} setGames={setGames} filteredGames={filteredGames} setFilteredGames={setFilteredGames} user={profileUser} fetchUserData={fetchUserData} currentUser={currentUser} />
         </Container>
     )
 }
