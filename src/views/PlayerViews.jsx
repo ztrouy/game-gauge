@@ -3,6 +3,7 @@ import { Games } from "../components/games/Games.jsx"
 import { NavBar } from "../components/nav/NavBar.jsx"
 import { Profile } from "../components/profiles/Profile.jsx"
 import { Paper } from "@mui/material"
+import { ProfileForm } from "../components/forms/ProfileForm.jsx"
 
 export const PlayerViews = ({ currentUser }) => {  
     return (
@@ -20,6 +21,7 @@ export const PlayerViews = ({ currentUser }) => {
                 <Route path="profile">
                     <Route index element={<Profile currentUser={currentUser} />} />
                     <Route path=":userId" element={<Profile currentUser={currentUser} />} />
+                    <Route path="edit" element={<ProfileForm currentUser={currentUser} />} />
                 </Route>
             </Route>
         </Routes>

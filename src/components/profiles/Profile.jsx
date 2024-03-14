@@ -1,8 +1,8 @@
-import { Container, Paper, Typography } from "@mui/material"
+import { Box, Button, Container, Paper, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getAllGames } from "../../services/gameService.jsx"
 import { GameList } from "../games/GameList.jsx"
-import { useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { getUserById } from "../../services/userService.jsx"
 
 export const Profile = ({ currentUser }) => {
@@ -51,13 +51,26 @@ export const Profile = ({ currentUser }) => {
     }
 
 
+    const navigate = useNavigate()
+
+
+    const handleEditButton = () => {
+        navigate("/profile/edit")
+    }
+
+
 
     return (
         <Container>
             <Paper sx={{mt: 3, mb: 3}}>
-                <Typography variant="h3" fontWeight={"bold"} textAlign={"left"} padding={2}>
-                    {profileUser?.name}
-                </Typography>
+                <Box display={"flex"} alignContent={"center"} justifyContent={"space-between"}>
+                    <Typography variant="h3" fontWeight={"bold"} textAlign={"left"} padding={2}>
+                        {profileUser?.name}
+                    </Typography>
+                    <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} padding={3}>
+                        {currentUser?.id === profileUser?.id ? (<Button variant="contained" onClick={handleEditButton}>Edit Profile</Button>) : ("")}
+                    </Box>
+                </Box>
             </Paper>
             <Typography fontWeight={"bold"} textAlign={"left"}>{profileUser?.name}'s Game Library</Typography>
             <GameList games={games} setGames={setGames} filteredGames={filteredGames} setFilteredGames={setFilteredGames} user={profileUser} fetchUserData={fetchUserData} currentUser={currentUser} />
