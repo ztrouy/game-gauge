@@ -55,7 +55,11 @@ export const Profile = ({ currentUser }) => {
 
 
     const handleEditButton = () => {
-        navigate("/profile/edit")
+        if (profileUser.id === currentUser.id) {
+            navigate("/profile/edit")
+        } else {
+            navigate(`/profile/edit/${profileUser.id}`)
+        }
     }
 
 
@@ -68,7 +72,7 @@ export const Profile = ({ currentUser }) => {
                         {profileUser?.name}
                     </Typography>
                     <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} padding={3}>
-                        {currentUser?.id === profileUser?.id ? (<Button variant="contained" onClick={handleEditButton}>Edit Profile</Button>) : ("")}
+                        {currentUser?.id === profileUser?.id || currentUser?.isStaff ? (<Button variant="contained" onClick={handleEditButton}>Edit Profile</Button>) : ("")}
                     </Box>
                 </Box>
             </Paper>
