@@ -29,7 +29,7 @@ export const Profile = ({ currentUser }) => {
             const userObject = userArray[0]
             setProfileUser(userObject)
         })
-    }, [currentUser])
+    }, [currentUser, userId])
 
 
     useEffect(() => {
