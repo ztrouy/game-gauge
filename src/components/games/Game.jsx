@@ -2,6 +2,7 @@ import { Button, Card, CardMedia, Typography, Box, Paper } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUserById } from "../../services/userService.jsx"
 import { createUserGame, deleteUserGame } from "../../services/gameService.jsx"
+import { Link } from "react-router-dom"
 
 export const Game = ({ game, user, fetchUserData, currentUser }) => {
     const [ownsGame, setOwnsGame] = useState(false)
@@ -71,6 +72,11 @@ export const Game = ({ game, user, fetchUserData, currentUser }) => {
                         {game.name}
                     </Typography>
                     <Box marginTop={1} sx={{ display: "flex", justifyContent: "right"}}>
+                        {currentUser.isStaff ? (
+                            <Button variant="contained" sx={{marginRight: 1}} component={Link} to={`/games/edit/${game.id}`}>Edit Game</Button>
+                        ) : (
+                            ""
+                        )}
                         {ownsGame ? (
                             <Button variant="contained" onClick={handleButton}>Remove Game</Button>
                         ) : (
