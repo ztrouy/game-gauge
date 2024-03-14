@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { getUserById } from "../../services/userService.jsx"
 import { createUserGame, deleteUserGame } from "../../services/gameService.jsx"
 
-export const Game = ({ game, user, currentUser }) => {
+export const Game = ({ game, user, fetchUserData, currentUser }) => {
     const [ownsGame, setOwnsGame] = useState(false)
     const [activeUser, setActiveUser] = useState({})
 
@@ -37,7 +37,7 @@ export const Game = ({ game, user, currentUser }) => {
         if (ownsGame) {
             const currentUserGame = activeUser.userGames.find(userGame => userGame.gameId === game.id)
             deleteUserGame(currentUserGame.id).then(() => {
-                setOwnsGame(false)
+                fetchUserData()
             })
         } else {
             const newUserGame = {
@@ -45,7 +45,7 @@ export const Game = ({ game, user, currentUser }) => {
                 gameId: game.id
             }
             createUserGame(newUserGame).then(() => {
-                setOwnsGame(true)
+                fetchUserData()
             })
         }
     }
