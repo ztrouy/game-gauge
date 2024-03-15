@@ -1,12 +1,17 @@
 import { Box, Button, Container, Paper, Snackbar, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUserById, updateUser } from "../../services/userService.jsx"
+import { useParams } from "react-router"
 
 export const ProfileForm = ({ currentUser }) => {
     const [userData, setUserData] = useState({})
     const [userName, setUserName] = useState("")
     const [userEmail, setUserEmail] = useState("")
     const [open, setOpen] = useState(false)
+
+
+
+    const { userId } = useParams()
 
 
 
@@ -41,10 +46,17 @@ export const ProfileForm = ({ currentUser }) => {
 
 
     const fetchUserData = () => {
-        getUserById(currentUser.id).then(userArray => {
-            const userObject = userArray[0]
-            setUserData(userObject)
-        })
+        if (userId) {
+            getUserById(userId).then(userArray => {
+                const userObject = userArray[0]
+                setUserData(userObject)
+            })
+        } else {
+            getUserById(currentUser.id).then(userArray => {
+                const userObject = userArray[0]
+                setUserData(userObject)
+            })
+        }
     }
 
     const handleNameChange = (event) => {
