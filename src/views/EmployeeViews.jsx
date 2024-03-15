@@ -4,6 +4,7 @@ import { NavBar } from "../components/nav/NavBar.jsx"
 import { Games } from "../components/games/Games.jsx"
 import { Profile } from "../components/profiles/Profile.jsx"
 import { ProfileForm } from "../components/forms/ProfileForm.jsx"
+import { GameForm } from "../components/forms/GameForm.jsx"
 
 export const EmployeeViews = ({ currentUser }) => {
     return (
@@ -17,9 +18,9 @@ export const EmployeeViews = ({ currentUser }) => {
                 <Route index element={<Games currentUser={currentUser} />} />
                 <Route path="games">
                     <Route index element={<Games currentUser={currentUser} />} />
-                    <Route path="new" element={<>New Game View</>} />
+                    <Route path="new" element={<GameForm currentUser={currentUser} />} />
                     <Route path="edit" >
-                        <Route path=":gameId" element={<>Edit Game View</>}/>
+                        <Route path=":gameId" element={<GameForm currentUser={currentUser} />}/>
                     </Route>
                 </Route>
                 <Route path="profile">
