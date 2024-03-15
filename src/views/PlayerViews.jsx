@@ -1,5 +1,6 @@
 import { Outlet, Route, Routes } from "react-router"
 import { Games } from "../components/games/Games.jsx"
+import { Groups } from "../components/groups/Groups.jsx"
 import { NavBar } from "../components/nav/NavBar.jsx"
 import { Profile } from "../components/profiles/Profile.jsx"
 import { Paper } from "@mui/material"
