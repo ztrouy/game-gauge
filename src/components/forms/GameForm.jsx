@@ -1,7 +1,7 @@
 import { Box, Button, Chip, Container, FormControl, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getAllGameTypes } from "../../services/gameTypeService.js"
-import { createGameGenre, deleteGameGenre, getAllGenres } from "../../services/genreService.js"
+import { createGameGenre, deleteGameGenre, getAllGameGenresByGameId, getAllGenres } from "../../services/genreService.js"
 import { useNavigate, useParams } from "react-router"
 import { createGame, getAllGames, getGameById, updateGame } from "../../services/gameService.jsx"
 
@@ -118,7 +118,7 @@ export const GameForm = () => {
             if (doesGenreChoiceExist(genreChoices, genre) && !doesGenreChoiceExist(importedGenreChoices, genre)) {
                 createNewGameGenre(genre.id)
             } else if (!doesGenreChoiceExist(genreChoices, genre) && doesGenreChoiceExist(importedGenreChoices, genre)) {
-                deleteGameGenre(genre.id)
+                deleteExistingGameGenre(genre.id)
             }
         }
     }
@@ -136,6 +136,7 @@ export const GameForm = () => {
         copy.maxPlayers = parseInt(playerCount)
         copy.imageBanner = ""
         copy.imageHeader = headerURL
+        delete copy.gameGenres
 
         console.log(copy)
         
@@ -168,6 +169,14 @@ export const GameForm = () => {
         for (const genre of genreChoices) {
             createNewGameGenre(genre)
         }
+    }
+
+
+    const deleteExistingGameGenre = (genreId) => {
+        getAllGameGenresByGameId(gameId).then(gameGenresArray => {
+            const gameGenreToDelete = gameGenresArray.find(gameGenre => gameGenre.genreId === genreId)
+            deleteGameGenre(gameGenreToDelete.id)
+        })
     }
     
 
