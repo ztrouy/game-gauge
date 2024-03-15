@@ -93,6 +93,8 @@ export const ProfileForm = ({ currentUser }) => {
             return
         }
 
+        delete editedUserData.userGames
+
         updateUser(editedUserData).then(() => {
             fetchUserData()
             setOpen(true)
