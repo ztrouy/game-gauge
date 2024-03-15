@@ -5,6 +5,7 @@ import { Games } from "../components/games/Games.jsx"
 import { Profile } from "../components/profiles/Profile.jsx"
 import { ProfileForm } from "../components/forms/ProfileForm.jsx"
 import { GameForm } from "../components/forms/GameForm.jsx"
+import { Groups } from "../components/groups/Groups.jsx"
 
 export const EmployeeViews = ({ currentUser }) => {
     return (
@@ -30,6 +31,9 @@ export const EmployeeViews = ({ currentUser }) => {
                         <Route index element={<ProfileForm currentUser={currentUser} />} />
                         <Route path=":userId" element={<ProfileForm currentUser={currentUser} />} />
                     </Route>
+                </Route>
+                <Route path="groups">
+                    <Route index element={<Groups currentUser={currentUser} />} />
                 </Route>
             </Route>
         </Routes>

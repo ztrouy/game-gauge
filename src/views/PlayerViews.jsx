@@ -23,6 +23,9 @@ export const PlayerViews = ({ currentUser }) => {
                     <Route path=":userId" element={<Profile currentUser={currentUser} />} />
                     <Route path="edit" element={<ProfileForm currentUser={currentUser} />} />
                 </Route>
+                <Route path="groups">
+                    <Route index element={<Groups currentUser={currentUser} />} />
+                </Route>
             </Route>
         </Routes>
     )
