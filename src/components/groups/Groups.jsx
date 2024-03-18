@@ -17,9 +17,7 @@ export const Groups = ({ currentUser }) => {
 
     useEffect(() => {
         if (currentUser.id) {
-            getUserById(currentUser.id).then(userObject => {
-                setActiveUser(userObject)
-            })
+            fetchActiveUser()
         }
     }, [currentUser])
     
@@ -32,10 +30,17 @@ export const Groups = ({ currentUser }) => {
     }
 
 
+    const fetchActiveUser = () => {
+        getUserById(currentUser.id).then(userObject => {
+            setActiveUser(userObject)
+        })
+    }
+
+
 
     return (
         <Container>
-            <GroupList groups={groups} fetchGroups={fetchGroups} activeUser={activeUser} currentUser={currentUser} />
+            <GroupList groups={groups} fetchGroups={fetchGroups} activeUser={activeUser} fetchActiveUser={fetchActiveUser} currentUser={currentUser} />
         </Container>
     )
 }
