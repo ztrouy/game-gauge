@@ -92,6 +92,7 @@ export const ProfileForm = ({ currentUser }) => {
         }
 
         delete editedUserData.userGames
+        delete editedUserData.userGroups
 
         updateUser(editedUserData).then(() => {
             fetchUserData()
