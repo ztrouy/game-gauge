@@ -34,6 +34,10 @@ export const EmployeeViews = ({ currentUser }) => {
                 </Route>
                 <Route path="groups">
                     <Route index element={<Groups currentUser={currentUser} />} />
+                    <Route path=":groupId">
+                        <Route index element={<>Group Details View</>} />
+                        <Route path="edit" element={<>Group Edit View</>} />
+                    </Route>
                 </Route>
             </Route>
         </Routes>
