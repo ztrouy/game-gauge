@@ -2,6 +2,7 @@ import { Box, Button, Paper, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUserById } from "../../services/userService"
 import { useNavigate } from "react-router"
+import { createUserGroup, deleteUserGroup } from "../../services/groupService.js"
 
 export const Group = ({ group, fetchGroups, activeUser, fetchActiveUser, currentUser }) => {
     const [members, setMembers] = useState([])
@@ -36,6 +37,27 @@ export const Group = ({ group, fetchGroups, activeUser, fetchActiveUser, current
     }
 
 
+    const handleLeave = () => {
+        const userGroupToDelete = activeUser.userGroups.find(userGroup => userGroup.groupId === group.id)
+        deleteUserGroup(userGroupToDelete.id).then(() => {
+            fetchGroups()
+            fetchActiveUser()
+        })
+    }
+
+
+    const handleJoin = () => {
+        const newUserGroup = {
+            userId: activeUser.id,
+            groupId: group.id
+        }
+        createUserGroup(newUserGroup).then(() => {
+            fetchGroups()
+            fetchActiveUser()
+        })
+    }
+
+
 
     return(
         <Paper elevation={3} sx={{marginTop: 2, padding: 4}}>
@@ -50,11 +72,11 @@ export const Group = ({ group, fetchGroups, activeUser, fetchActiveUser, current
                 <Box display={"flex"} flexDirection={"row"} alignItems={"flex-end"}>
                     {isInGroup ? (
                         <>
-                            <Button>Leave</Button>
+                            <Button onClick={handleLeave}>Leave</Button>
                             <Button variant="contained" onClick={handleOpen}>Open</Button>
                         </>
                     ) : (
-                        <Button>Join</Button>
+                        <Button onClick={handleJoin}>Join</Button>
                     )}
                 </Box>
             </Box>
