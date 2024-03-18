@@ -20,7 +20,9 @@ export const Games = ({ currentUser }) => {
 
 
     useEffect(() => {
-        fetchUserData()
+        if (currentUser.id) {
+            fetchUserData()
+        }
     }, [currentUser])
 
     
