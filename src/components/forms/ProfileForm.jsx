@@ -47,13 +47,11 @@ export const ProfileForm = ({ currentUser }) => {
 
     const fetchUserData = () => {
         if (userId) {
-            getUserById(userId).then(userArray => {
-                const userObject = userArray[0]
+            getUserById(userId).then(userObject => {
                 setUserData(userObject)
             })
         } else {
-            getUserById(currentUser.id).then(userArray => {
-                const userObject = userArray[0]
+            getUserById(currentUser.id).then(userObject => {
                 setUserData(userObject)
             })
         }
@@ -94,6 +92,7 @@ export const ProfileForm = ({ currentUser }) => {
         }
 
         delete editedUserData.userGames
+        delete editedUserData.userGroups
 
         updateUser(editedUserData).then(() => {
             fetchUserData()

@@ -55,8 +55,7 @@ export const GameForm = () => {
     
     
     const importExistingGame = (id) => {
-        getGameById(id).then(data => {
-            const gameToImport = data[0]
+        getGameById(id).then(gameToImport => {
             
             setGameObject(gameToImport)
             setTitle(gameToImport.name)

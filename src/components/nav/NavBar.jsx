@@ -16,6 +16,7 @@ export const NavBar = ({ currentUser }) => {
                             ) : (
                                 ""
                             )}
+                            <Button variant="text" component={Link} to={"/groups"} sx={{color: "white"}}>Groups</Button>
                         </Grid>
                         <Grid>
                             <Button variant="text" component={Link} to={"/profile"} sx={{color: "white"}}>Profile</Button>

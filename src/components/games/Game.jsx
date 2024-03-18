@@ -12,8 +12,7 @@ export const Game = ({ game, user, fetchUserData, currentUser }) => {
 
     useEffect(() => {
         if (user?.id != currentUser.id) {
-            getUserById(currentUser.id).then(userArray => {
-                const userObject = userArray[0]
+            getUserById(currentUser.id).then(userObject => {
                 setActiveUser(userObject)
             })
         } else {

@@ -3,7 +3,7 @@ export const getAllGames = () => {
 }
 
 export const getGameById = (gameId) => {
-    return fetch(`http://localhost:8088/games?id=${gameId}&_embed=gameGenres`).then(res => res.json())
+    return fetch(`http://localhost:8088/games/${gameId}/?_embed=gameGenres`).then(res => res.json())
 }
 
 export const createGame = (gameObject) => {
