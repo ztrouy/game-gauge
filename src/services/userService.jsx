@@ -13,7 +13,7 @@ export const getUserByEmail = (email) => {
 }
 
 export const getUserById = (id) => {
-    return fetch(`http://localhost:8088/users/${id}/?_embed=userGames`).then(res => res.json())
+    return fetch(`http://localhost:8088/users/${id}/?_embed=userGames&_embed=userGroups`).then(res => res.json())
 }
   
 export const createUser = (newUser) => {
