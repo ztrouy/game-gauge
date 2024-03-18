@@ -1,7 +1,7 @@
-import { Box, Container, Typography } from "@mui/material"
+import { Container } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getAllGroups } from "../../services/groupService"
-import { Group } from "./Group"
+import { GroupList } from "./GroupList.jsx"
 
 export const Groups = ({ currentUser }) => {
     const [groups, setGroups] = useState([])
@@ -24,11 +24,7 @@ export const Groups = ({ currentUser }) => {
 
     return (
         <Container>
-            <Box>
-                {groups.map(group => {
-                    return <Group group={group} currentUser={currentUser} />
-                })}
-            </Box>
+            <GroupList groups={groups} currentUser={currentUser} />
         </Container>
     )
 }
