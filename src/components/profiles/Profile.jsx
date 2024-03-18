@@ -44,8 +44,7 @@ export const Profile = ({ currentUser }) => {
             profileId = currentUser.id
         }
 
-        getUserById(profileId).then(userArray => {
-            const userObject = userArray[0]
+        getUserById(profileId).then(userObject => {
             setProfileUser(userObject)
         })
     }

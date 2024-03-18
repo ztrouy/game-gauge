@@ -26,8 +26,7 @@ export const Games = ({ currentUser }) => {
     
 
     const fetchUserData = () => {
-        getUserById(currentUser.id).then(userArray => {
-            const userObject = userArray[0]
+        getUserById(currentUser.id).then(userObject => {
             setUser(userObject)
         })
     }
