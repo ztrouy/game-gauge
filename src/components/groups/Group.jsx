@@ -3,9 +3,8 @@ import { useEffect, useState } from "react"
 import { getUserById } from "../../services/userService"
 import { useNavigate } from "react-router"
 
-export const Group = ({ group, currentUser }) => {
+export const Group = ({ group, fetchGroups, activeUser, fetchActiveUser, currentUser }) => {
     const [members, setMembers] = useState([])
-    const [activeUser, setActiveUser] = useState({})
     const [isInGroup, setIsInGroup] = useState(false)
     
 
@@ -20,16 +19,12 @@ export const Group = ({ group, currentUser }) => {
     }, [group])
 
 
-    useEffect(() => {
-        getUserById(currentUser.id).then(userObject => {
-            setActiveUser(userObject)
-        })
-    }, [currentUser])
-
 
     useEffect(() => {
-
-    })
+        if (activeUser.userGroups?.find(userGroup => userGroup.groupId === group.id)) {
+            setIsInGroup(true)
+        } else { setIsInGroup(false) }
+    }, [activeUser, group])
 
 
 
@@ -53,8 +48,14 @@ export const Group = ({ group, currentUser }) => {
 
                 </Box>
                 <Box display={"flex"} flexDirection={"row"} alignItems={"flex-end"}>
-                    <Button>Leave</Button>
-                    <Button variant="contained" onClick={handleOpen}>Open</Button>
+                    {isInGroup ? (
+                        <>
+                            <Button>Leave</Button>
+                            <Button variant="contained" onClick={handleOpen}>Open</Button>
+                        </>
+                    ) : (
+                        <Button>Join</Button>
+                    )}
                 </Box>
             </Box>
         </Paper>
