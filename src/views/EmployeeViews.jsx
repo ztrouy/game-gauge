@@ -6,6 +6,7 @@ import { Profile } from "../components/profiles/Profile.jsx"
 import { ProfileForm } from "../components/forms/ProfileForm.jsx"
 import { GameForm } from "../components/forms/GameForm.jsx"
 import { Groups } from "../components/groups/Groups.jsx"
+import { GroupForm } from "../components/forms/GroupForm.jsx"
 
 export const EmployeeViews = ({ currentUser }) => {
     return (
@@ -34,10 +35,10 @@ export const EmployeeViews = ({ currentUser }) => {
                 </Route>
                 <Route path="groups">
                     <Route index element={<Groups currentUser={currentUser} />} />
-                    <Route path="new" element={<>New Group View</>} />
+                    <Route path="new" element={<GroupForm currentUser={currentUser} />} />
                     <Route path=":groupId">
                         <Route index element={<>Group Details View</>} />
-                        <Route path="edit" element={<>Group Edit View</>} />
+                        <Route path="edit" element={<GroupForm currentUser={currentUser} />} />
                     </Route>
                 </Route>
             </Route>
