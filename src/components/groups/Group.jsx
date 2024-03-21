@@ -4,7 +4,7 @@ import { getUserById } from "../../services/userService"
 import { useNavigate } from "react-router"
 import { createUserGroup, deleteUserGroup } from "../../services/groupService.js"
 
-export const Group = ({ group, isCompact, fetchGroups, activeUser, fetchActiveUser, currentUser }) => {
+export const Group = ({ group, fetchGroups, activeUser, fetchActiveUser, currentUser }) => {
     const [members, setMembers] = useState([])
     const [isInGroup, setIsInGroup] = useState(false)
     
