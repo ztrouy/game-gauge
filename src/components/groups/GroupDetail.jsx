@@ -138,9 +138,10 @@ export const GroupDetail = ({ currentUser }) => {
         const copy = [...filteredGroupGames]
         copy.splice(chosenGameValue, 1)
 
-        
         setFilteredGroupGames(copy)
         
+        const randomChoice = Math.floor(Math.random() * copy.length)
+        setChosenGameValue(randomChoice)
     }
 
 
