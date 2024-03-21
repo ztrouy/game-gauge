@@ -6,15 +6,16 @@ import { Profile } from "../components/profiles/Profile.jsx"
 import { Paper } from "@mui/material"
 import { ProfileForm } from "../components/forms/ProfileForm.jsx"
 import { GroupForm } from "../components/forms/GroupForm.jsx"
+import { GroupDetail } from "../components/groups/GroupDetail.jsx"
 
 export const PlayerViews = ({ currentUser }) => {  
     return (
         <Routes>
             <Route path="/" element={
-                <Paper>
+                <>
                     <NavBar currentUser={currentUser} />
                     <Outlet />
-                </Paper>
+                </>
             }>
                 <Route index element={<Games currentUser={currentUser} />} />
                 <Route path="games">
@@ -29,7 +30,7 @@ export const PlayerViews = ({ currentUser }) => {
                     <Route index element={<Groups currentUser={currentUser} />} />
                     <Route path="new" element={<GroupForm currentUser={currentUser} />} />
                     <Route path=":groupId">
-                        <Route index element={<>Group Details View</>} />
+                        <Route index element={<GroupDetail currentUser={currentUser} />} />
                         <Route path="edit" element={<GroupForm currentUser={currentUser} />} />
                     </Route>
                 </Route>
