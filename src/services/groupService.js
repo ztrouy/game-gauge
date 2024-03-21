@@ -3,7 +3,7 @@ export const getAllGroups = () => {
 }
 
 export const getGroupById = (groupId) => {
-    return fetch(`http://localhost:8088/groups/${groupId}`).then(res => res.json())
+    return fetch(`http://localhost:8088/groups/${groupId}/?_embed=userGroups`).then(res => res.json())
 }
 
 export const createGroup = (newGroup) => {

@@ -17,7 +17,9 @@ export const Profile = ({ currentUser }) => {
 
 
     useEffect(() => {
-        fetchUserData()
+        if (currentUser.id) {
+            fetchUserData()
+        }
     }, [currentUser, userId])
 
 
@@ -76,7 +78,7 @@ export const Profile = ({ currentUser }) => {
                 </Box>
             </Paper>
             <Typography fontWeight={"bold"} textAlign={"left"}>{profileUser?.name}'s Game Library</Typography>
-            <GameList games={games} setGames={setGames} filteredGames={filteredGames} setFilteredGames={setFilteredGames} user={profileUser} fetchUserData={fetchUserData} currentUser={currentUser} />
+            <GameList games={games} isCompact={false} setGames={setGames} filteredGames={filteredGames} setFilteredGames={setFilteredGames} user={profileUser} fetchUserData={fetchUserData} currentUser={currentUser} />
         </Container>
     )
 }

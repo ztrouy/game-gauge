@@ -59,6 +59,7 @@ export const GroupForm = ({ currentUser }) => {
     const editExistingGroup = () => {
         getGroupById(groupId).then(groupObject => {
             groupObject.name = title
+            delete groupObject.userGroups
             
             updateGroup(groupObject).then(() => {
                 navigate("/groups")

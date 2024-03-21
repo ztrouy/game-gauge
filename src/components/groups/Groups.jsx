@@ -44,7 +44,7 @@ export const Groups = ({ currentUser }) => {
             <Box display={"flex"} paddingTop={2}>
                 <Button component={Link} to={"/groups/new"}>New Group</Button>
             </Box>
-            <GroupList groups={groups} fetchGroups={fetchGroups} activeUser={activeUser} fetchActiveUser={fetchActiveUser} currentUser={currentUser} />
+            <GroupList groups={groups} fetchGroups={fetchGroups} activeUser={activeUser} fetchActiveUser={fetchActiveUser} />
         </Container>
     )
 }
