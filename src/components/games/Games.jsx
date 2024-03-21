@@ -45,6 +45,7 @@ export const Games = ({ currentUser }) => {
                     />
                 <GameList 
                     games={games} 
+                    isCompact={false}
                     setGames={setGames} 
                     filteredGames={filteredGames} 
                     setFilteredGames={setFilteredGames} 
