@@ -15,6 +15,7 @@ export const GameForm = () => {
     const [currentGenreChoice, setCurrentGenreChoice] = useState(0)
     const [genreChoices, setGenreChoices] = useState([])
     const [importedGenreChoices, setImportedGenreChoices] = useState([])
+    const [importedGameGenres, setImportedGameGenres] = useState([])
     const [playerCount, setPlayerCount] = useState(0)
     const [headerURL, setHeaderURL] = useState("")
 
@@ -67,6 +68,9 @@ export const GameForm = () => {
             setGenreChoices(importedGameGenres)
             setImportedGenreChoices(importedGameGenres)
         })
+        getAllGameGenresByGameId(gameId).then(gameGenresArray => {
+            setImportedGameGenres(gameGenresArray)
+        })
     }
 
 
@@ -111,15 +115,21 @@ export const GameForm = () => {
         return genreChoiceArray.find(genreChoice => genreChoice === genreToCheckAgainst.id)
     }
 
-    
-    const handleModifyingGameGenres = () => {
+
+    const modifyGameGenres = () => {
+        const arrayOfPromises = []
+
         for (const genre of genres) {
             if (doesGenreChoiceExist(genreChoices, genre) && !doesGenreChoiceExist(importedGenreChoices, genre)) {
-                createNewGameGenre(genre.id)
+                arrayOfPromises.push(createNewGameGenre(genre.id))
             } else if (!doesGenreChoiceExist(genreChoices, genre) && doesGenreChoiceExist(importedGenreChoices, genre)) {
-                deleteExistingGameGenre(genre.id)
+                arrayOfPromises.push(deleteExistingGameGenre(genre.id))
             }
         }
+
+        const results = Promise.all(arrayOfPromises)
+
+        return results
     }
 
 
@@ -141,7 +151,9 @@ export const GameForm = () => {
         
         if (gameId) {
             updateGame(copy).then(() => {
-                handleModifyingGameGenres()
+                modifyGameGenres()
+            }).then(() => {
+                navigate("/games")
             })
         } else {
             createGame(copy).then(() => {
@@ -150,7 +162,6 @@ export const GameForm = () => {
                 navigate("/games")
             })
         }
-        
     }
 
     
@@ -172,10 +183,8 @@ export const GameForm = () => {
 
 
     const deleteExistingGameGenre = (genreId) => {
-        getAllGameGenresByGameId(gameId).then(gameGenresArray => {
-            const gameGenreToDelete = gameGenresArray.find(gameGenre => gameGenre.genreId === genreId)
-            deleteGameGenre(gameGenreToDelete.id)
-        })
+        const gameGenreToDelete = importedGameGenres.find(gameGenre => gameGenre.genreId === genreId)
+        return deleteGameGenre(gameGenreToDelete.id)
     }
     
 
