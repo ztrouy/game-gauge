@@ -3,13 +3,13 @@
   }
   
   .container-login > section > a {
-    text-decoration: underline;
-    color: var(--secondary);
+    text-decoration: none;
+    color: black;
   }
   
   .form-login {
     max-width: 800px;
-    /* width: auto; */
+    width: auto;
     margin: 2rem auto;
   }
   
