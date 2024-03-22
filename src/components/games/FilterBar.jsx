@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllGameTypes } from "../../services/gameTypeService.js"
 import { getAllGenres } from "../../services/genreService.js"
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, ToggleButton, ToggleButtonGroup } from "@mui/material"
 
 export const FilterBar = ({ games, setFilteredGames, user }) => {
     const [gameTypes, setGameTypes] = useState([])
@@ -70,6 +70,13 @@ export const FilterBar = ({ games, setFilteredGames, user }) => {
     }
 
 
+    const handleGamesListToggle = (event, newToggle) => {
+        if (newToggle !== null) {
+            setShowOnlyOwnedGames(newToggle)
+        }
+    }
+
+
 
     return (
         <Grid container direction={"row"} justifyContent={"space-between"} marginBottom={3} paddingTop={3}>
@@ -117,22 +124,18 @@ export const FilterBar = ({ games, setFilteredGames, user }) => {
                     <Button variant="outlined" onClick={clearFilters}>Clear Filters</Button>
                 </Grid>
             </Box>
-            <Box display={"flex"} alignItems={"center"}>
-                <Grid>
-                    <Button
-                        variant="outlined"
-                        onClick={() => {setShowOnlyOwnedGames(false)}}
-                    >
-                        All
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        onClick={() => {setShowOnlyOwnedGames(true)}}
-                    >
-                        My
-                    </Button>
-                </Grid>
-            </Box>
+            <ToggleButtonGroup
+                value={showOnlyOwnedGames}
+                exclusive
+                onChange={handleGamesListToggle}
+            >
+                <ToggleButton value={false}>
+                    All Games
+                </ToggleButton>
+                <ToggleButton value={true}>
+                    My Games
+                </ToggleButton>
+            </ToggleButtonGroup>
         </Grid>
     )
 }
