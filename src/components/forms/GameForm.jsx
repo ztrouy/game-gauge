@@ -133,12 +133,7 @@ export const GameForm = () => {
     }
 
 
-    const handleSubmit = () => {
-        if (!title || !playerCount || !gameTypeChoice || genreChoices.length === 0 || !headerURL) {
-            window.alert("You haven't filled out all the fields!")
-            return
-        }
-
+    const createNewGameObject = () => {
         const copy = {...gameObject}
         copy.name = title
         copy.typeId = gameTypeChoice
@@ -147,19 +142,29 @@ export const GameForm = () => {
         copy.imageHeader = headerURL
         delete copy.gameGenres
 
-        console.log(copy)
-        
+        return copy
+    }
+
+    
+    const handleSubmit = () => {
+        if (!title || !playerCount || !gameTypeChoice || genreChoices.length === 0 || !headerURL) {
+            window.alert("You haven't filled out all the fields!")
+            return
+        }
+
+        const copy = createNewGameObject()
+
         if (gameId) {
             updateGame(copy).then(() => {
-                modifyGameGenres()
-            }).then(() => {
-                navigate("/games")
+                modifyGameGenres().then(() => {
+                    navigate("/games")
+                })
             })
         } else {
             createGame(copy).then(() => {
-                createAllGameGenres()
-            }).then(() => {
-                navigate("/games")
+                createAllGameGenres().then(() => {
+                    navigate("/games")
+                })
             })
         }
     }
@@ -171,14 +176,20 @@ export const GameForm = () => {
             genreId: genreId
         }
         
-        createGameGenre(newGameGenre)
+        return createGameGenre(newGameGenre)
     }
     
     
     const createAllGameGenres = () => {
+        const arrayOfPromises = []
+        
         for (const genre of genreChoices) {
-            createNewGameGenre(genre)
+            arrayOfPromises.push(createNewGameGenre(genre))
         }
+
+        const results = Promise.all(arrayOfPromises)
+
+        return results
     }
 
 
