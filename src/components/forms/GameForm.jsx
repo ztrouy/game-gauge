@@ -142,6 +142,9 @@ export const GameForm = () => {
         if (gameId) {
             updateGame(copy).then(() => {
                 handleModifyingGameGenres()
+                setTimeout(() => {
+                    navigate("/games")
+                }, 250);
             })
         } else {
             createGame(copy).then(() => {
@@ -150,7 +153,6 @@ export const GameForm = () => {
                 navigate("/games")
             })
         }
-        
     }
 
     
