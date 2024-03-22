@@ -115,16 +115,6 @@ export const GameForm = () => {
         return genreChoiceArray.find(genreChoice => genreChoice === genreToCheckAgainst.id)
     }
 
-    
-    const handleModifyingGameGenres = () => {
-        for (const genre of genres) {
-            if (doesGenreChoiceExist(genreChoices, genre) && !doesGenreChoiceExist(importedGenreChoices, genre)) {
-                createNewGameGenre(genre.id)
-            } else if (!doesGenreChoiceExist(genreChoices, genre) && doesGenreChoiceExist(importedGenreChoices, genre)) {
-                deleteExistingGameGenre(genre.id)
-            }
-        }
-    }
 
     const modifyGameGenres = () => {
         const arrayOfPromises = []
