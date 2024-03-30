@@ -148,7 +148,7 @@ export const GroupDetail = ({ currentUser }) => {
 
     return (
         <Container>
-            <Typography variant="h4" fontWeight={"bold"} textAlign={"left"} marginTop={5} sx={{color: "black"}}>{group.name}</Typography>
+            <Typography variant="h4" fontWeight={"bold"} textAlign={"left"} marginTop={5}>{group.name}</Typography>
             <Box display={"flex"} flexDirection={"row"} justifyContent={"space-between"} marginTop={4}>
                 <Box width={"65%"}>
                     {chosenGame?.name ? (
@@ -176,7 +176,7 @@ export const GroupDetail = ({ currentUser }) => {
                                     </Box>
                                 </Box>
                                 <Box display={"flex"} width={"100%"} justifyContent={"left"}>
-                                    <Button variant="contained" onClick={randomizeChosenGame} sx={{marginRight: 1}}>Reroll</Button>
+                                    <Button variant="contained" onClick={randomizeChosenGame} sx={{marginRight: 1, color: "white"}}>Reroll</Button>
                                     <Button variant="contained" onClick={handleRemoveGame}>Remove</Button>
                                 </Box>
                             </Box>
@@ -184,7 +184,7 @@ export const GroupDetail = ({ currentUser }) => {
                     ) : (
                         ""
                     )}
-                    <Typography variant="h5" textAlign={"left"} fontWeight={"bold"} sx={{color: "black"}}>Game List</Typography>
+                    <Typography variant="h5" textAlign={"left"} fontWeight={"bold"}>Game List</Typography>
                     <GameList 
                         isCompact={true} 
                         games={groupGames} 
