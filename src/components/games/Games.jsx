@@ -36,7 +36,7 @@ export const Games = ({ currentUser }) => {
 
 
     return (
-        <Container maxWidth={false}>
+        <Container maxWidth={false} disableGutters>
             <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
                 <FilterBar 
                     games={games} 
