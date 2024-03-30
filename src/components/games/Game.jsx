@@ -4,6 +4,7 @@ import { getUserById } from "../../services/userService.jsx"
 import { createUserGame, deleteUserGame } from "../../services/gameService.jsx"
 import { Link } from "react-router-dom"
 
+
 export const Game = ({ game, isCompact, user, fetchUserData, currentUser }) => {
     const [ownsGame, setOwnsGame] = useState(false)
     const [activeUser, setActiveUser] = useState({})
@@ -60,7 +61,7 @@ export const Game = ({ game, isCompact, user, fetchUserData, currentUser }) => {
                         <Typography fontWeight={"bold"}>{game.name}</Typography>
                         <Box sx={{ display: "flex", justifyContent: "right"}}>
                             {currentUser.isStaff ? (
-                                <Button variant="contained" sx={{marginRight: 1}} component={Link} to={`/games/edit/${game.id}`}>Edit Game</Button>
+                                <Button variant="contained" sx={{marginRight: 1, color: "white"}} component={Link} to={`/games/edit/${game.id}`}>Edit Game</Button>
                             ) : (
                                 ""
                             )}
@@ -93,7 +94,7 @@ export const Game = ({ game, isCompact, user, fetchUserData, currentUser }) => {
                             </Typography>
                             <Box marginTop={1} sx={{ display: "flex", justifyContent: "right"}}>
                                 {currentUser.isStaff ? (
-                                    <Button variant="contained" sx={{marginRight: 1}} component={Link} to={`/games/edit/${game.id}`}>Edit Game</Button>
+                                    <Button variant="contained" sx={{marginRight: 1, color: "white"}} component={Link} to={`/games/edit/${game.id}`}>Edit Game</Button>
                                 ) : (
                                     ""
                                 )}
