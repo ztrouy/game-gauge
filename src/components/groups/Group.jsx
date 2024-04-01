@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from "@mui/material"
+import { Box, Button, Paper, Typography, useTheme } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getUserById } from "../../services/userService"
 import { useNavigate } from "react-router"
@@ -32,6 +32,9 @@ export const Group = ({ group, fetchGroups, activeUser, fetchActiveUser, current
     const navigate = useNavigate()
 
 
+    const theme = useTheme()
+
+
     const handleOpen = () => {
         navigate(`/groups/${group.id}`)
     }
@@ -60,7 +63,7 @@ export const Group = ({ group, fetchGroups, activeUser, fetchActiveUser, current
 
 
     return(
-        <Paper elevation={3} sx={{marginTop: 2, padding: 4}}>
+        <Paper elevation={3} sx={{marginTop: 2, padding: 4, backgroundColor: theme.palette.surface.default, backgroundImage: "none"}}>
             <Typography variant="h4" textAlign={"left"} fontWeight={"bold"}>{group.name}</Typography>
             <Box paddingTop={1} display={"flex"} flexDirection={"row"} justifyContent={"space-between"}>
                 <Box>
