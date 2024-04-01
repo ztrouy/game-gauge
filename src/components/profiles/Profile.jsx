@@ -1,9 +1,10 @@
-import { Box, Button, Container, Paper, Typography } from "@mui/material"
+import { Box, Button, Container, IconButton, Paper, Typography, useTheme } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getAllGames } from "../../services/gameService.jsx"
 import { GameList } from "../games/GameList.jsx"
 import { useNavigate, useParams } from "react-router"
 import { getUserById } from "../../services/userService.jsx"
+import { Edit } from "@mui/icons-material"
 
 export const Profile = ({ currentUser }) => {
     const [games, setGames] = useState([])
@@ -55,6 +56,9 @@ export const Profile = ({ currentUser }) => {
     const navigate = useNavigate()
 
 
+    const theme = useTheme()
+
+
     const handleEditButton = () => {
         if (profileUser.id === currentUser.id) {
             navigate("/profile/edit")
@@ -67,13 +71,22 @@ export const Profile = ({ currentUser }) => {
 
     return (
         <Container>
-            <Paper sx={{mt: 3, mb: 3}}>
+            <Paper sx={{mt: 3, mb: 3, backgroundImage: "none", backgroundColor: theme.palette.surface.default}}>
                 <Box display={"flex"} alignContent={"center"} justifyContent={"space-between"}>
                     <Typography variant="h3" fontWeight={"bold"} textAlign={"left"} padding={2}>
                         {profileUser?.name}
                     </Typography>
-                    <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} padding={3}>
+                    <Box flexDirection={"column"} justifyContent={"center"} padding={3} sx={{display: {xs: "none", md: "flex"}}}>
                         {currentUser?.id === profileUser?.id || currentUser?.isStaff ? (<Button variant="contained" onClick={handleEditButton}>Edit Profile</Button>) : ("")}
+                    </Box>
+                    <Box padding={3} sx={{display: {xs: "flex", md: "none"}}}>
+                        {currentUser?.id === profileUser?.id || currentUser?.isStaff ? (
+                            <IconButton onClick={handleEditButton}>
+                                <Edit />
+                            </IconButton>
+                        ) : (
+                            ""
+                        )}
                     </Box>
                 </Box>
             </Paper>
