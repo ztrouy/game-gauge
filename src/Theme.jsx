@@ -67,7 +67,6 @@ export const ThemeDark = createTheme ({
     components: {
         MuiCard: {
             defaultProps: {
-                // elevation: 24,
                 sx: {backgroundColor: "#2f3e51", backgroundImage: "none"}
             }
         },
