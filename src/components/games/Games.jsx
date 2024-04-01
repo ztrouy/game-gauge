@@ -16,7 +16,7 @@ export const Games = ({ currentUser }) => {
         getAllGames().then(gamesArray => {
             setGames(gamesArray)
         })
-    }, [])
+    }, [user])
 
 
     useEffect(() => {
