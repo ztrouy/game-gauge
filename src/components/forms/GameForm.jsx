@@ -1,4 +1,4 @@
-import { Box, Button, Chip, Container, FormControl, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material"
+import { Box, Button, Chip, Container, FormControl, InputLabel, MenuItem, Paper, Select, TextField, Typography, useTheme } from "@mui/material"
 import { useEffect, useState } from "react"
 import { getAllGameTypes } from "../../services/gameTypeService.js"
 import { createGameGenre, deleteGameGenre, getAllGameGenresByGameId, getAllGenres } from "../../services/genreService.js"
@@ -111,6 +111,9 @@ export const GameForm = () => {
     const navigate = useNavigate()
 
 
+    const theme = useTheme()
+
+
     const doesGenreChoiceExist = (genreChoiceArray, genreToCheckAgainst) => {
         return genreChoiceArray.find(genreChoice => genreChoice === genreToCheckAgainst.id)
     }
@@ -203,7 +206,7 @@ export const GameForm = () => {
     return (
         <Container>
             <Box display={"flex"} justifyContent={"center"}>
-                <Paper sx={{padding: 4, margin: 4, width: "90%", maxWidth: "600px"}}>
+                <Paper sx={{padding: 4, margin: 4, width: "90%", maxWidth: "600px", backgroundColor: theme.palette.surface.default, backgroundImage: "none"}}>
                     <Typography variant="h4" textAlign={"left"}>Add New Game</Typography>
                     <Box display={"flex"} paddingTop={3} justifyContent={"left"}>
                         <TextField label="Game Title" value={title} onChange={event => setTitle(event.target.value)}/>

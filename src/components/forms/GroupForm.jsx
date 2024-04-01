@@ -1,4 +1,4 @@
-import { Box, Button, Container, Paper, TextField, Typography } from "@mui/material"
+import { Box, Button, Container, Paper, TextField, Typography, useTheme } from "@mui/material"
 import { useEffect, useState } from "react"
 import { createGroup, createUserGroup, getAllGroups, getGroupById, updateGroup } from "../../services/groupService.js"
 import { useNavigate, useParams } from "react-router"
@@ -24,6 +24,9 @@ export const GroupForm = ({ currentUser }) => {
 
 
     const navigate = useNavigate()
+
+
+    const theme = useTheme()
     
     
     const handleSubmit = () => {
@@ -73,7 +76,7 @@ export const GroupForm = ({ currentUser }) => {
     return (
         <Container>
             <Box display={"flex"} justifyContent={"center"}>
-                <Paper sx={{padding: 4, margin: 4, width: "90%", maxWidth: "600px"}}>
+                <Paper sx={{padding: 4, margin: 4, width: "90%", maxWidth: "600px", backgroundImage: "none", backgroundColor: theme.palette.surface.default}}>
                     <Typography variant="h4" textAlign={"left"}>Create New Group</Typography>
                     <Box display={"flex"} paddingTop={3} justifyContent={"left"}>
                         <TextField label="Group Title" value={title} onChange={event => setTitle(event.target.value)} />
