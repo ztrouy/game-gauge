@@ -25,6 +25,9 @@ export const ThemeLight = createTheme ({
             main: '#00a25d',
             dark: '#00a25d',
         },
+        surface: {
+            default: '#ffffff'
+        }
     }
 })
 
@@ -56,22 +59,31 @@ export const ThemeDark = createTheme ({
         success: {
             main: '#00a25d',
             dark: '#00a25d',
+        },
+        surface: {
+            default: '#2f3e51'
         }
     },
     components: {
         MuiCard: {
             defaultProps: {
-                elevation: 24
+                // elevation: 24,
+                sx: {backgroundColor: "#2f3e51", backgroundImage: "none"}
             }
         },
         MuiPaper: {
             defaultProps: {
-                elevation: 24
+                elevation: 3
             }
         }, 
         MuiButton: {
             defaultProps: {
                 sx: {color: 'white'}
+            }
+        },
+        MuiAppBar: {
+            defaultProps: {
+                sx: {backgroundImage: "none"}
             }
         }
     }
